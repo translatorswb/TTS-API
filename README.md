@@ -13,13 +13,13 @@ This is a simple Text-to-speech (TTS) REST API based on the 🐸 [Coqui TTS demo
 	
 ## Demo
 
-A demo app with Catalan, Galician and Ladino models is available at http://catotron.collectivat.cat. 
+A demo app with Marma model is available at http://moisil.translatorswb.org/tts
 
 ## Setup and installation
 
 Start by cloning this repository and create your models directory:
 ```
-git clone https://github.com/CollectivaT-dev/TTS-API.git
+git clone https://github.com/translatorswb/TTS-API.git
 cd TTS-API
 mkdir models
 ```
@@ -43,7 +43,7 @@ Then, you need to setup the `config.json` file which contains information about 
 
 ```
 {
-    "languages":{"en":"English", "es":"Spanish", "tr":"Turkish", "lad":"Ladino", "ca":"Catalan"}, <--- This is a dictionary mapping language codes to human-readable language name
+    "languages":{"en":"English", "rmz":"Marma}, <--- This is a dictionary mapping language codes to human-readable language name
     "models": [
         {
             "voice": "karen",			<--- Name of your voice
@@ -62,6 +62,13 @@ Then, you need to setup the `config.json` file which contains information about 
             "vocoder_config_path": "vocoder-config.json",	<--- Path to Vocoder model configuration file (if you have)
             "vocoder_model_path": "vocoder-model.pth.tar",	<--- Path to Vocoder checkpoint (if you have)
             "load": false
+        },
+	{
+            "voice": "marma-mms",
+            "lang": "rmz",
+            "model_type": "mms",  <---  To specify it's MMS model
+            "base_model_path": "rmz",
+            "load": true
         }
     ]
 }
@@ -241,35 +248,6 @@ You can see example preprocessors in the repository.
 
 ## Languages
 
-### Galician
+### Marma
 
-Models available in [Proxecto Nós's HuggingFace repository](https://huggingface.co/collections/proxectonos/tts-models-65cf35498df786a4d59bafa4)
-
-If you're using a phonetic model that depends on Cotovia library, you need to make sure:
-
-1. Have a processor with `amd64` or `i386` architecture
-2. Create an empty directory with name `deb` in the project directory
-3. Download binary packages `cotovia_0.5_<arch>.deb` and `cotovia-lang-gl_0.5_all.deb` to `deb` directory from https://sourceforge.net/projects/cotovia/files/Debian%20packages/ 
-
-Then if you're running locally on a debian based machine, install cotovia manually using the commands:
-
-```
-dpkg -i deb/cotovia_0.5_amd64.deb
-dpkg -i deb/cotovia-lang-gl_0.5_all.deb
-```
-
-If you prefer to run with docker, use the corresponding `Dockerfile` that installs them. You can execute the following commands to do that:
-
-```
-mv Dockerfile Dockerfile-nogl
-mv docker/Dockerfile-gl-cotovia Dockerfile
-```
-
-### Ladino
-
-Models available in [Ladino Data Hub](https://data.sefarad.com.tr/dataset/tts-training-dataset)
-
-### Catalan
-
-- [Catotron Ona](https://g4e5.c13.e2-2.dev/dataset-share/catotron-ona-fast-speech-v0.2.zip) - License: OpenRail, Data: UPC's [FestCat dataset](http://festcat.talp.cat/download.php) 
-- Catotron Pau (coming soon)
+Info coming soon
